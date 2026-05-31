@@ -1,0 +1,32 @@
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Go to home page">
+      <span class="brand-mark">DVS</span>
+      <span class="brand-text">Portfolio</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      data-nav-toggle
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+    >
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <div class="nav-links" id="primary-navigation" data-nav-menu>
+      {% for item in nav_items %}
+        <a
+          href="{{ url_for(item.endpoint) }}"
+          {% if active_page == item.endpoint %}aria-current="page" class="active"{% endif %}
+        >
+          {{ item.label }}
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+</header>

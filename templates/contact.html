@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio | Contacts{% endblock %}
+
+{% block content %}
+  <section class="content-section page-intro contact-page-intro">
+    <div class="section-heading">
+      <p class="eyebrow">Get In Touch</p>
+      <h1>{{ person.name }}</h1>
+    </div>
+    <p class="lead page-lead">
+      {{ person.title }} who is open to conversations about projects, collaboration, and community-focused work.
+    </p>
+  </section>
+
+  <section class="content-section contact-section">
+    <div class="contact-layout">
+      <div class="contact-panel">
+        <p>
+          Send a direct message using the form below.
+        </p>
+
+        {% if success_message %}
+          <p class="form-status form-status-success" role="status">{{ success_message }}</p>
+        {% endif %}
+
+        {% if error_message %}
+          <p class="form-status form-status-error" role="status">{{ error_message }}</p>
+        {% endif %}
+
+        <form class="contact-form" method="post" action="{{ url_for('contact') }}">
+          <label class="form-field">
+            <span>Name</span>
+            <input type="text" name="name" value="{{ form_name }}" required>
+          </label>
+
+          <label class="form-field">
+            <span>Email</span>
+            <input type="email" name="email" value="{{ form_email }}" required>
+          </label>
+
+          <label class="form-field">
+            <span>Message</span>
+            <textarea name="message" placeholder="Enter your message" rows="4" required>{{ form_message }}</textarea>
+          </label>
+
+          <button class="primary-action send-button" type="submit">Send</button>
+        </form>
+
+        <p class="copy-status" data-copy-status aria-live="polite"></p>
+      </div>
+
+      <div class="contact-aside">
+        <img src="{{ url_for('static', filename='backgrounds/profile.png') }}" alt="Profile photo" class="contact-photo">
+      </div>
+    </div>
+  </section>
+{% endblock %}

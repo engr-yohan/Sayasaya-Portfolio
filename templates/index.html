@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio | Home{% endblock %}
+
+{% block content %}
+  <section class="hero" id="home">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ person.title }}</p>
+      <h1>{{ person.name }}</h1>
+      <p class="lead">
+        {{ person.bio }}
+      </p>
+
+      <div class="hero-actions">
+        <a class="primary-action" href="{{ url_for('projects') }}">View Projects</a>
+        <a class="secondary-action" href="{{ url_for('contact') }}">Get in Touch</a>
+      </div>
+
+      <div class="social-links" aria-label="Social links">
+        <a href="https://github.com/engr-yohan" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/denver-sayasaya-727226330/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section about-section" id="about">
+    <div class="section-heading">
+      <h2>About Me</h2>
+    </div>
+    <div class="about-grid">
+      <img src="{{ url_for('static', filename='backgrounds/profile.png') }}" alt="{{ person.name }}" class="about-profile">
+      <div class="about-text">
+        <p>
+          I am a Computer Engineering student at the Polytechnic University of the Philippines (Main), currently diving into Big Data as an elective. My goal is to build a rock-solid foundation as a Data Engineer, with a specific focus on environmental and social applications.
+        </p>
+        <p>
+          My journey is driven by a desire to give back. While participating in social and environmental initiatives, a turning point occurred during an organization event where I learned how to pitch ideas. This sparked a vision of how I could leverage data engineering to create a tangible, positive future for our communities. I deeply believe in the philosophy of being "a light in the darkness"—using technology to care, protect, and provide hope.
+        </p>
+        <p>
+          Beyond data pipelines, I have a strong passion for electronic circuits and thoroughly enjoy building hands-on projects that bridge hardware and software.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section purpose-section" id="purpose">
+    <div class="section-heading">
+      <p class="eyebrow">Mission</p>
+      <h2>Technology with a Purpose</h2>
+    </div>
+    <div class="hero-bio hero-bio-below">
+      <p>
+        For me, it's not just about the technology—it’s about caring for the greater good.
+      </p>
+    </div>
+    
+  </section>
+{% endblock %}

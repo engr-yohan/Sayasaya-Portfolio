@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Minimal personal portfolio website." />
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+  </head>
+  <body>
+    {% include 'partials/navigation.html' %}
+    <main class="page-shell">
+      {% block content %}{% endblock %}
+    </main>
+    <script>
+      const navToggle = document.querySelector('[data-nav-toggle]');
+      const navMenu = document.querySelector('[data-nav-menu]');
+      const copyButton = document.querySelector('[data-copy-email]');
+      const copyStatus = document.querySelector('[data-copy-status]');
+
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('is-open');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navMenu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      if (copyButton) {
+        copyButton.addEventListener('click', async () => {
+          const email = copyButton.getAttribute('data-email') || '';
+
+          try {
+            await navigator.clipboard.writeText(email);
+            if (copyStatus) {
+              copyStatus.textContent = 'Email copied to clipboard.';
+            }
+            copyButton.textContent = 'Copied';
+          } catch (error) {
+            if (copyStatus) {
+              copyStatus.textContent = 'Copy failed. Use the email link instead.';
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
